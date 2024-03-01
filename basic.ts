@@ -69,3 +69,26 @@ const matrix: number[][] = [
     [1, 2],
     [3, 4],
 ];
+
+/* Enums: They define a set of named constant*/
+enum AgentRole {
+    Duelist,
+    Controller,
+    Sentinel,
+    Initiator
+}
+
+enum AgentRole2 {
+    Duelist = "duelist",
+    Controller = "controller",
+    Sentinel = "sentinel",
+    Initiator = "initiator"
+}
+
+console.log(AgentRole[0]);
+console.log(AgentRole.Controller);
+console.log(AgentRole2.Initiator);
+// console.log(AgentRole2[3]); //This is somehow wrong
+console.log(AgentRole2['Sentinel']);
+
+console.log(AgentRole);

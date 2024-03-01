@@ -55,3 +55,56 @@ const alice: PersonAndEmployee = {
 
 console.log(`El tipo de dato de alice es ${typeof alice}`)
 console.log(alice)
+
+// Union types
+type Morph = {
+    imitationForm?: string,
+    level : number,
+    goldValue: number | boolean
+}
+
+const morphling: Morph = {
+    level: 6,
+    imitationForm: "Phantom Assasin",
+    goldValue: true
+}
+
+let password : string | number;
+
+type Admin = {
+    email: string
+    password: string | number
+    level: number
+}
+
+type User  = {
+    email: string
+    password: string | number
+}
+
+let rotz: Admin | User = {
+    email: "hector@rotz.com",
+    password: 0o30102
+    //level: 5 //Esto puede ir comentado o no
+}
+
+
+const manyItems: (number | string)[] = [4,4,9,"Hola"/* , false */];
+
+// Literal types
+let color : "red" | "blue" | "green";
+let valorantEarth: "alpha" | "omega";
+//valorantEarth = "beta"
+valorantEarth = "alpha"
+
+/* Tuples Array with a fixed number of arrays, the order of the types in the tuple definition corresponds to the
+   the order of the values in the actual array. Tuples are similar to arrays, but thet have a specific structure. */
+let myTuple: [string, number];
+// myTuple = [7, "goodbye angels"]; //Wrong, not following the tuple structure
+myTuple = ["hello", 7];
+console.log(myTuple)
+let [first, second] = myTuple;
+console.log(`${first} to earth ${second}`);
+
+const passwords: (number | string)[] = ["item 1", 12];
+console.log(passwords);
