@@ -108,3 +108,80 @@ console.log(`${first} to earth ${second}`);
 
 const passwords: (number | string)[] = ["item 1", 12];
 console.log(passwords);
+
+// Object Oriented Programming
+/* Class Properties Annotations
+ * To annotate class properties with a type. 
+ */
+
+class PersonClass {
+    readonly name: string;
+    readonly age: number;
+
+    constructor( name: string, age: number ) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+const classDeclaredPerson = new PersonClass("John", 20);
+console.log(classDeclaredPerson);
+
+/* Access Modifiers
+ * Control the visibility of class members
+ * Public -> Can be accessed from anywhere
+ * Private -> Can only be accessed from within the class they are defined in
+ * Protected -> Can be accessed from within the class they are defined in, as well as any subclasses that extend the class
+*/
+
+class Pet {
+    public name: string;
+    public age: number;
+    private owner: string;
+    protected race?: string; 
+    constructor(name: string, age: number, owner: string) {
+        this.name = name;
+        this.age = age;
+        this.owner = owner;
+    }
+
+    getOWner(): string {
+        return `The owner of ${this.name} is ${this.owner}`
+    }
+}
+
+class Dog extends Pet {
+    constructor (name: string, age: number, owner: string, race: string) {
+        super(name, age, owner);
+        this.race = race;
+    }
+}
+
+let dog = new Pet("Sova", 1, "Luis");
+console.log(dog.name);
+//console.log(dog.owner); //La propiedad 'owner' es privada y solo se puede acceder a ella en la clase 'Pet'.ts(2341)
+console.log(dog.getOWner());
+
+let dog2 = new Dog("Blue", 12, "Ariel", "Beagle");
+console.log(dog2);
+
+/* Getters & Setters
+ * Used to access and modify class properties. Getters and setters allow us to define
+ * a property in a class that looks like a simple variable from the outside but internally has
+ * additional logic for getting and setting the value
+*/
+
+class Computer {
+    private _macDirection: number = 0o212;
+
+    get macDirection() : number {
+        return this._macDirection;
+    }
+    set macDirection(value: number) {
+        this._macDirection = value;
+    }
+}
+const hp = new Computer();
+console.log(`Current Value: ${hp.macDirection}`)
+hp.macDirection = 449;
+console.log(`Current Value: ${hp.macDirection}`)
