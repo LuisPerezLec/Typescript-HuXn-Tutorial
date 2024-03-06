@@ -182,6 +182,140 @@ class Computer {
     }
 }
 const hp = new Computer();
-console.log(`Current Value: ${hp.macDirection}`)
+console.log(`Current Value: ${hp.macDirection}`);
 hp.macDirection = 449;
-console.log(`Current Value: ${hp.macDirection}`)
+console.log(`Current Value: ${hp.macDirection}`);
+
+/* Interfaces
+ * Is a way to define a contract for the shape of an object.
+ * It specifies the properties and its types that them must have.
+ * Interfaces are a powerful tool for enforcing a certain structure.
+*/
+
+interface Motorcycle {
+    brand: string;
+    model: string;
+    hp: number;
+    tankCapacity: number | null;
+    accelerate(): void;
+}
+
+const motorcycle1: Motorcycle = {
+    brand: "Yamaha",
+    hp: 41,
+    model: "YBR R3",
+    tankCapacity: 14,
+    accelerate() {
+        console.log(`${this.brand} is accelerating`)
+    }
+}
+
+motorcycle1.accelerate();
+
+// Interfaces for functions
+interface MathOperation {
+    (x: number, y: number): number;
+}
+
+const addition2: MathOperation = (a, b) => a + b;
+const substraction: MathOperation = (a, b) => a - b;
+
+console.log(addition2(12,2));
+console.log(substraction(17,3));
+
+// Interfaces for classes
+interface Vehicle {
+    start(): void;
+    stop(): void; // Methods can also be optional as stop?()
+    readonly model: string;
+}
+
+class Car implements Vehicle {
+    model: string; // Even when the Vehicle interface defines the model property, the class needs to declare it.
+    constructor(model:string) {
+        this.model = model;
+    }
+    start() {
+        console.log(`Car ${this.model} started`);
+    }
+    stop() {
+        console.log("Car stopped");
+    }
+}
+
+const car1 = new Car("Jetta 2006");
+car1.start();
+
+interface Song {
+    songName: string;
+    singerName: string;
+    printSongInfo(listener: string): string;
+}
+
+const songs: Song[] = []; //Array of items with Song interface
+
+const song1: Song = {
+    songName: "HONEY",
+    singerName: "David Damiano",
+    printSongInfo (listener) {
+        return `${listener} is listening to ${this.songName} - ${this.singerName}`
+    }
+}
+
+console.log(song1.printSongInfo("Luis"));
+
+interface MovieDetails {
+    readonly name: string;
+    ratings: number;
+    printMovieInfo( name: string, price: number, ratings: number): string | number;
+}
+
+interface MovieGenra extends MovieDetails {
+    genra: string;
+}
+
+const movie1: MovieGenra = {
+    name: "Real Steel",
+    genra: "Action Sci-Fi",
+    ratings: 9.9,
+    printMovieInfo (
+        name: string,
+        price: number,
+        ratings: number
+        ): string | number { // The tutorial does this, i find it redundant and stupid, but, anyways
+            return `Movie name: ${name} Price: ${price} Ratings: ${ratings}`
+    }
+}
+
+const res1 = movie1.printMovieInfo(`Real Steel`, 90, 99);
+console.log(res1);
+
+/* Declaration merging
+ * Once an interface is declared, it cannote be directly modified
+ * Declaration merging refer to the ability to extend or uagment an
+ * existing declaration, including interfaces.
+ */
+// Original interface
+interface Building {
+    floors: number;
+    build(): void;
+}
+
+// Declaration merging (interface extension)
+interface Building {
+    material: string;
+    demolish(): void;
+}
+
+const empireState: Building = {
+    floors:  50,
+    material: "Block",
+    build() {
+        console.log(`Building the ${this.floors} floors`)
+    },
+    demolish() {
+        console.log(`Demoloshing the ${this.floors} floors`)
+    },
+}
+
+empireState.build();
